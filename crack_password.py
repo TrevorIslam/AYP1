@@ -15,7 +15,7 @@
 # make sure to credit Science Buddies. Using somebody else's code without giving
 # them credit is plagiarism, just like if you copied their writing.
 #
-# You'll notice that several parts of the code have places where 
+# You'll notice that several parts of the code have places where
 # print() functions have been turned into comments. You might want to uncomment
 # these print statements when debugging your program (or add more of your own in
 # other places), but they will make your program run slower. There are also many lines
@@ -36,7 +36,7 @@ else:
     show_instructions = True
     print("Okay, the program will display more information as it runs and pause at each step.")
     input("Press enter to continue.")
-    
+
 #--------------- global variables we expect will be used by any function -----------
 #
 # a number from 1 to 6 selects which password we'll be trying to guess from
@@ -79,7 +79,7 @@ def MD5me(s):
 # Takes a number from 0 on up and the number of digits we want it to have. It uses that
 # number of digits to make a string like "0000" if we wanted 4 or "00000" if we wanted
 # 5, converts our input number to a character string, sticks them together and then returns
-# the number we started with, with extra zeroes stuck on the beginning. 
+# the number we started with, with extra zeroes stuck on the beginning.
 def leading_zeroes(n, zeroes):
     t=("0"*zeroes)+str(n)
     t=t[-zeroes:]
@@ -90,7 +90,7 @@ def leading_zeroes(n, zeroes):
 def check_userpass(which_password, password):
     global password0, password1, password2, password3
     global password4, password5, password6
-    
+
     result = False
 
     if (0 == which_password):
@@ -112,15 +112,15 @@ def check_userpass(which_password, password):
     if (4 == which_password):
         if (MD5me(password) == password4):
             result = True
-            
+
     if (5 == which_password):
         if (MD5me(password) == password5):
             result = True
-            
+
     if (6 == which_password):
         if (MD5me(password) == password6):
             result = True
-            
+
     return result
 
 # This displays the results of a search including tests per second when possible
@@ -147,7 +147,7 @@ def make_human_readable(n):
         temp = temp /100
         result = str(temp)
     return result
-        
+
 ## A little helper program to remove any weird formatting in the file
 def cleanup (s):
     s = s.strip()
@@ -223,10 +223,10 @@ def search_method_2(num_pass_wheels):
             print("Press ctrl+C to stop the program.")
             print("Read the comments in Method 2 of the program for more information.")
             print()
-    
+
     # set all of the wheels to the first position
     pass_wheel_array=array('i',[1,0,0,0,0,0,0,0,0])
-        
+
     while still_searching:
         ourguess_pass = ""
         for i in range(0,num_pass_wheels):  # once for each wheel
@@ -243,7 +243,7 @@ def search_method_2(num_pass_wheels):
             #print ("Darn. " + ourguess + " is NOT the password.")
         tests = tests + 1
         totalguesses = totalguesses + 1
-        
+
 # spin the rightmost wheel and if it changes, spin the next one over and so on
         carry = 1
         for i in range(0,num_pass_wheels): # once for each wheel
@@ -270,7 +270,7 @@ def search_method_2(num_pass_wheels):
 def search_method_3(file_name):
     global totalguesses
     result = False
-    
+
     # Start by reading the list of words into a Python list
     f = open(file_name)
     words = f.readlines()
@@ -279,9 +279,9 @@ def search_method_3(file_name):
     number_of_words = len(words)
     print()
     print("Using method 3 with a list of "+str(number_of_words)+" words...")
-    
+
     ## Depending on the file system, there may be extra characters before
-    ## or after the words. 
+    ## or after the words.
     for i in range(0, number_of_words):
         words[i] = cleanup(words[i])
 
@@ -294,21 +294,21 @@ def search_method_3(file_name):
     while still_searching:
         ourguess_pass = words[word1count]
         # uncomment the next line to print the current guess
-        # print("Guessing: "+ourguess_pass)
+        print("Guessing: "+ourguess_pass)
         # Try it the way it is in the word list
         if (check_userpass(which_password, ourguess_pass)):
             print ("Success! Password "+str(which_password)+" is " + ourguess_pass)
             still_searching = False   # we can stop now - we found it!
             result = True
-        #else:
-            #print ("Darn. " + ourguess_pass + " is NOT the password.")
+        else:
+            print ("Darn. " + ourguess_pass + " is NOT the password.")
         tests = tests + 1
         totalguesses = totalguesses + 1
         # Now let's try it with the first letter capitalized
         if still_searching:
             ourguess_pass = Cap(ourguess_pass)
             # uncomment the next line to print the current guess
-            # print("Guessing: "+ourguess_pass)
+            print("Guessing: "+ourguess_pass)
             if (check_userpass(which_password, ourguess_pass)):
                 print ("Success! Password "+str(which_password)+" is " + ourguess_pass)
                 still_searching = False   # we can stop now - we found it!
@@ -326,22 +326,22 @@ def search_method_3(file_name):
     report_search_time(tests, seconds)
     return result
 
-# *** METHOD 4 ***     
+# *** METHOD 4 ***
 # Search method 4 is similar to 3 in that it uses the dictionary, but it tries two
 # two words separated by a punctuation character.
 def search_method_4(file_name):
     global totalguesses
     result = False
-    
+
     # Start by reading the list of words into a Python list
     f = open(file_name)
     words = f.readlines()
     f.close
     # We need to know how many there are
     number_of_words = len(words)
-    
+
     ## Depending on the file system, there may be extra characters before
-    ## or after the words. 
+    ## or after the words.
     for i in range(0, number_of_words):
         words[i] = cleanup(words[i])
 
@@ -440,12 +440,12 @@ def main(argv=None):
     global which_password
 
     # To test your own algorithms, change password0. This password is displayed
-    # in "plaintext" so you can see the password in advance. 
-    password0 = "a1b2"
-    
+    # in "plaintext" so you can see the password in advance.
+    password0 = "1234"
+
     # These are the passwords created by Science Buddies for you to try and crack.
     # Their real text is hidden from you using something called MD5 hashing. This converts
-    # the original password to a block of (seemingly) gibberish text. 
+    # the original password to a block of (seemingly) gibberish text.
     # You can create your own MD5 hashes using the MD5me function in this program.
     # For example, the code
     # password7=MD5me("ScienceBuddies")
@@ -479,7 +479,7 @@ def main(argv=None):
         print("It will not guess password 6 unless you make some changes to the code.")
         print()
     which_password = int(input("Which password do you want to try to guess (0-6)? "))
-    
+
     if 6 == which_password and show_instructions:
         print()
         print("WARNING: The example code will NOT guess password 6 on its own!")
@@ -499,7 +499,7 @@ def main(argv=None):
         print("Read the comments in the code for more details about each method.")
         input("Press enter to continue.")
         print()
-    
+
     overallstart = time.time()
     foundit = False
     print("Trying to guess password "+str(which_password)+"...")
@@ -580,4 +580,3 @@ def main(argv=None):
 print ("Science Buddies: How Easily Can Your password Be Hacked?")
 if __name__ == "__main__":
     sys.exit(main(sys.argv[1:]))
-
