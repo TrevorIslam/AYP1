@@ -294,21 +294,21 @@ def search_method_3(file_name):
     while still_searching:
         ourguess_pass = words[word1count]
         # uncomment the next line to print the current guess
-        print("Guessing: "+ourguess_pass)
+        #print("Guessing: "+ourguess_pass)
         # Try it the way it is in the word list
         if (check_userpass(which_password, ourguess_pass)):
             print ("Success! Password "+str(which_password)+" is " + ourguess_pass)
             still_searching = False   # we can stop now - we found it!
             result = True
-        else:
-            print ("Darn. " + ourguess_pass + " is NOT the password.")
+        #else:
+            #print ("Darn. " + ourguess_pass + " is NOT the password.")
         tests = tests + 1
         totalguesses = totalguesses + 1
         # Now let's try it with the first letter capitalized
         if still_searching:
             ourguess_pass = Cap(ourguess_pass)
             # uncomment the next line to print the current guess
-            print("Guessing: "+ourguess_pass)
+            #print("Guessing: "+ourguess_pass)
             if (check_userpass(which_password, ourguess_pass)):
                 print ("Success! Password "+str(which_password)+" is " + ourguess_pass)
                 still_searching = False   # we can stop now - we found it!
@@ -441,7 +441,7 @@ def main(argv=None):
 
     # To test your own algorithms, change password0. This password is displayed
     # in "plaintext" so you can see the password in advance.
-    password0 = "1234"
+    password0 = "A"
 
     # These are the passwords created by Science Buddies for you to try and crack.
     # Their real text is hidden from you using something called MD5 hashing. This converts
